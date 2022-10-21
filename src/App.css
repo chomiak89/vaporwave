@@ -19,7 +19,7 @@
 body {
   background-color: #282c34;
   font-family: "Montserrat", sans-serif;
-  color: #fff;
+  height: 100vh;
 }
 
 /* NAVBAR COMPONENT */
