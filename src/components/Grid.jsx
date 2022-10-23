@@ -4,10 +4,10 @@ import '../stylesheets/grid.css'
 
 export default function Grid() {
     //context settings 
-    const {gridWidth, gridHeight} = useContext(AppContext)
+    const {gridWidth, gridWidthRef, gridHeight, gridHeightRef} = useContext(AppContext)
     //local states
-    const [columns, setColumns] = useState(Math.floor(document.body.clientWidth / 50))
-    const [rows, setRows] = useState(Math.floor(document.body.clientHeight / 50))
+    const [columns, setColumns] = useState(gridWidth)
+    const [rows, setRows] = useState(gridHeight)
 
 //testing console logs
 console.log('columns: ', columns)
@@ -17,18 +17,23 @@ console.log('rows: ', rows)
 const numOfElem = columns * rows
 
 //event list - update tiles printed on screen resize
-window.addEventListener("resize", (event) => {
-    console.log('changing')
-    setColumns(Math.floor(document.body.clientWidth / gridWidth))
-    setRows(Math.floor(document.body.clientHeight / gridHeight))
-})
+function updateOnResize() {
+  setColumns(Math.floor(document.body.clientWidth / gridWidthRef.current))
+  setRows(Math.floor(document.body.clientHeight / gridHeightRef.current))
+}
+
+useEffect(() => {
+  window.addEventListener("resize", () => {
+    updateOnResize()
+  })
+}, [])
 
 //update tiles on screen with width change from settings
 useEffect(() => {
   setColumns(Math.floor(document.body.clientWidth / gridWidth))
 }, [gridWidth])
 useEffect(() => {
-  setRows(Math.floor(document.body.clientWidth / gridHeight))
+  setRows(Math.floor(document.body.clientHeight / gridHeight))
 }, [gridHeight])
 
 console.log("number of elements: ", numOfElem)
