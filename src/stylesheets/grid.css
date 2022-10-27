@@ -6,3 +6,9 @@
 .grid-item {
   outline: 1px solid #fff;
 }
+.grid-item:hover {
+  background-color: #fff;
+}
+.grid-item:hover + div + div {
+  background-color: #fff;
+}
