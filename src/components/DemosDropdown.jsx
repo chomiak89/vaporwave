@@ -17,6 +17,7 @@ export default function DemosDropdown() {
         {visible && (
             <div className='demos-container'>
                 <Link to={'/grid'} onClick={() => {setCurrentDemo('grid')}}>Grid</Link>
+                <Link to={'/test'} onClick={() => {setCurrentDemo('test')}}>Test</Link>
             </div>
         )}
     </div>
