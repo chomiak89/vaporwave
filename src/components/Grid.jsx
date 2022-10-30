@@ -1,6 +1,7 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import { AppContext } from '../contexts/app.context'
 import '../stylesheets/grid.css'
+import anime from 'animejs'
 
 export default function Grid() {
     //context settings 
@@ -38,6 +39,36 @@ useEffect(() => {
 
 console.log("number of elements: ", numOfElem)
 
+// AnimeJS 
+
+const animation = useRef(null)
+
+// useEffect(() => {
+//   animation.current = anime ({
+//     targets: '.grid-main-container .grid-item',
+//     background: '#FFF',
+//     scale: [
+//       {value: .1, easing: 'easeOutSine', duration: 500},
+//       {value: 1, easing: 'easeInOutQuad', duration: 1200}
+//     ],
+//   delay: anime.stagger(200, {grid: [rows, columns], from: 'center'})
+//   }, [])
+// })
+
+const handleOnClickAnime = (index) => {
+  animation.current = anime ({
+    targets: '.grid-main-container .grid-item',
+    background: '#e76df2',
+    scale: [
+      {value: .1, easing: 'easeOutSine', duration: 500},
+      {value: 1, easing: 'easeInOutQuad', duration: 1200}
+    ],
+  delay: anime.stagger(200, {grid: [columns, rows], from: 'center'})
+  })
+}
+
+
+
   return (
     <div 
     className='grid-main-container' 
@@ -48,7 +79,7 @@ console.log("number of elements: ", numOfElem)
 
        {Array.from(Array(numOfElem)).map((e, i) => {
         return (
-            <div className='grid-item' key={i}></div>
+            <div className='grid-item' key={i} onClick={() => {handleOnClickAnime()}}></div>
         )
        })}
 
